@@ -104,7 +104,7 @@ public:
        Read num_samples from the microphone, and store them in the provided
        buffer
     */
-    virtual void getSamples(double *buffer, uint16_t num_samples) = 0;
+    virtual void getSamples(float *buffer, uint16_t num_samples) = 0;
 
     /* Get an up-to-date sample without DC offset */
     virtual int getSampleWithoutDCOffset() = 0;
@@ -208,7 +208,7 @@ public:
         }
     }
 
-    virtual void getSamples(double *buffer, uint16_t num_samples) {
+    virtual void getSamples(float *buffer, uint16_t num_samples) {
         if(_initialized) {
             esp_err_t err;
             size_t bytes_read = 0;        /* Counter variable to check if we actually got enough data */
@@ -498,7 +498,7 @@ public:
         _initialized = true;
     }
 
-    void getSamples(double *buffer, uint16_t num_samples) {
+    void getSamples(float *buffer, uint16_t num_samples) {
 
     /* Enable ADC. This has to be enabled and disabled directly before and
     after sampling, otherwise Wifi dies and analogRead() hangs
